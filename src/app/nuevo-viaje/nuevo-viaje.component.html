@@ -1,0 +1,33 @@
+<div class="" *ngIf="popupAbierto">
+    <div class="popup-content">
+    <!-- Contenido del popup -->
+  
+  
+    <div class="container">
+        <h2>Nuevo Viaje</h2>
+        <form (ngSubmit)="agregarViaje(city, fecha, vehiculo)">
+          <div class="form-group">
+            <label for="destino">Destino:</label>
+            <input type="text" class="form-control" id="destino"  name="destino" required #city>
+          </div>
+          <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" required #fecha>
+          </div>
+          <div class="form-group">
+            <label for="tipoVehiculo">Tipo de Vehículo:</label>
+            <select class="form-control" id="vehiculo" name="vehiculo" required #vehiculo>
+              <option value="">Seleccionar un vehiculo</option>
+              <option *ngFor="let option of options" [value]="option.patente">{{ option.patente }} - {{ option.tipo }}</option>
+            </select>
+          </div>
+          <br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Agregar Viaje</button>
+          </div>
+        </form>
+        <br>
+    </div>
+  </div>
+  </div>
+  

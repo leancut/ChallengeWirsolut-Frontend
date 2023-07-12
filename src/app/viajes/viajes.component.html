@@ -1,0 +1,35 @@
+
+
+<div class="container">
+    <h1 class="mt-4">Asignar Viajes</h1>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-primary" (click)="abrirNuevoViaje()">Nuevo Viaje</button>
+      </div>
+  
+    <table class="table mt-4" id = "my-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Destino</th>
+          <th>Vehículo</th>
+          <th>Clima</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let viaje of viajes">
+          <td>{{ viaje.fecha }}</td>
+          <td>{{ viaje.destino }}</td>
+          <td>{{ viaje.vehiculo }}</td>
+          <td><img src="http://openweathermap.org/img/w/{{viaje.clima.weather[0].icon}}.png"> &nbsp; {{ viaje.clima.weather[0].main }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="eliminarViaje(viaje.id)">Eliminar</button>&nbsp;
+            <button class="btn btn-sm btn-secondary">Reprogramar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

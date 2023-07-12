@@ -1,0 +1,32 @@
+<main class="nuevo-vehiculo">
+    <mat-card class="form-container">
+    
+        <mat-card-title>Ingresar Vehiculo</mat-card-title>
+        <mat-card-subtitle>A continuacion ingrese los datos del vehiculo</mat-card-subtitle>
+    
+        <form class="nuevo-vehiculo-form" (ngSubmit)="submit()" [formGroup]="vehiculoForm" >
+
+          <mat-form-field appearance="fill">
+            <mat-label>Patente</mat-label>
+            <input formControlName="patente" matInput>
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill">
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="tipo">
+              <mat-option value="Auto">Auto</mat-option>
+              <mat-option value="Moto">Moto</mat-option>
+              <mat-option value="Camion">Camion</mat-option>
+            </mat-select>
+        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Marca</mat-label>
+            <input formControlName="marca" matInput>
+          </mat-form-field>
+    
+          <button type="submit" mat-raised-button color="primary">Cargar</button>
+    
+        </form>
+        <br>
+      </mat-card>
+    </main>
