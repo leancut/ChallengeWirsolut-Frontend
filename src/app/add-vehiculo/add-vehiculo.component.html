@@ -11,16 +11,16 @@
         <tr>
           <th>ID</th>
           <th>Patente</th>
-          <th>Tipo de Vehículo</th>
           <th>Marca</th>
+          <th>Tipo de Vehículo</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let vehiculo of vehiculos">
           <td>{{ vehiculo.id }}</td>
-          <td>{{ vehiculo.marca }}</td>
           <td>{{ vehiculo.patente }}</td>
+          <td>{{ vehiculo.marca }}</td>
           <td>{{ vehiculo.tipo }}</td>
           <td>
             <button class="btn btn-sm btn-danger" (click)="eliminarVehiculo(vehiculo.id)">Eliminar</button>

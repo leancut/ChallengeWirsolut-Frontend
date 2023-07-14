@@ -31,8 +31,12 @@ export class NuevoViajeComponent implements OnInit {
   };
   data: any;
   options: Vehiculo[] = []; 
+  minDate!: string;
+  maxDate!: string;
 
-  constructor(private dialog: MatDialog, private viajeService: ViajesService) { }
+  constructor(private dialog: MatDialog, private viajeService: ViajesService) { 
+
+  }
 
   ngOnInit() {
     this.viajeService.getVehiculo().subscribe(
@@ -43,6 +47,20 @@ export class NuevoViajeComponent implements OnInit {
         console.error('Error al obtener las opciones', error);
       }
     );
+    const today = new Date();
+    const limit = new Date();
+    limit.setDate(today.getDate() + 10);
+    
+    this.minDate = this.formatDate(today);
+    this.maxDate = this.formatDate(limit);
+
+  }
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
   }
   
 
@@ -54,41 +72,39 @@ export class NuevoViajeComponent implements OnInit {
 
 
   async agregarViaje(city: HTMLDataElement, fecha: HTMLInputElement, vehiculo: HTMLDataElement ) {
+    console.log(fecha.valueAsNumber);
     try {
       this.data = await this.getWeatherData(city.value, fecha.valueAsNumber);
-      // Continuar con el proceso después de recibir la respuesta de la API y guardar los datos en 'data'
-      console.log('Proceso continuado');
+
       console.log('Datos del clima:', this.data);
-      // Aquí puedes agregar la lógica para realizar acciones adicionales después de obtener los datos
+      this.nuevoViaje = {
+        destino: city.value,
+        fecha: fecha.value,
+        vehiculo: vehiculo.value,
+        clima: this.data
+      };
+  
+      this.viajeService.agregarViaje(this.nuevoViaje);
+      this.nuevoViaje = {
+        destino: '',
+        fecha: '',
+        vehiculo: '',
+        clima: []
+      };
+          const dialogRef = this.dialog.closeAll();
+          this.popupAbierto = false;
     } catch (error) {
       console.error('Error al obtener los datos del clima', error);
     }
-    this.nuevoViaje = {
-      destino: city.value,
-      fecha: fecha.value,
-      vehiculo: vehiculo.value,
-      clima: this.data
-    };
-
-    this.viajeService.agregarViaje(this.nuevoViaje);
-    this.nuevoViaje = {
-      destino: '',
-      fecha: '',
-      vehiculo: '',
-      clima: []
-    };
-        // Cierra el popup estableciendo la variable de control en falso
-        const dialogRef = this.dialog.closeAll();
-        this.popupAbierto = false;
+   
   }
 
   getWeatherData(city: string, fecha: number): Promise<any> {
-    const timestampFormatoCompleto = `${fecha} 00:00:00`;
+    const timestampFormatoCompleto = `${fecha}`;
 
    const timestampEnMilisegundos = new Date(timestampFormatoCompleto).getTime();
-
     return new Promise((resolve, reject) => {
-      this.viajeService.getClima(city, timestampEnMilisegundos).subscribe((response: any) => {
+      this.viajeService.getClima(city, fecha).subscribe((response: any) => {
         resolve(response);
       }, error => {
         reject(error);

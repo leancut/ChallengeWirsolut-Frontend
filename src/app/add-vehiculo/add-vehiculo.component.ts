@@ -45,15 +45,12 @@ export class AddVehiculoComponent {
       this.vehiculos = resp;
     },
     error => {
-      //this.uiService.presentToast("Hubo un error cuando se intentó cargar la susbripción. Por favor de aviso al administrador", "error"); 
     }
     )
   }
 
   abrirNuevoVehiculo() {
-    // Aquí deberías implementar la lógica para abrir el popup de nuevo viaje
     const dialogRef = this.dialog.open(NuevoVehiculoComponent, {
-      width: '500px', // Define el ancho del diálogo según tus necesidades
       data: { viajeService: this.viajesService }
     });
   }

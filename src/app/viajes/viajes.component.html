@@ -14,19 +14,20 @@
           <th>Fecha</th>
           <th>Destino</th>
           <th>Vehículo</th>
-          <th>Clima</th>
+          <th>Clima para la fecha programada</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let viaje of viajes">
           <td>{{ viaje.fecha }}</td>
-          <td>{{ viaje.destino }}</td>
+          <td>{{ viaje.destino  | capitalizarPrimeraLetra }}</td>
           <td>{{ viaje.vehiculo }}</td>
-          <td><img src="http://openweathermap.org/img/w/{{viaje.clima.weather[0].icon}}.png"> &nbsp; {{ viaje.clima.weather[0].main }}</td>
+          <td><img src="http://openweathermap.org/img/w/{{viaje.clima.weather[0].icon}}.png"> &nbsp; {{ viaje.clima.weather[0].description | capitalizarPrimeraLetra }}</td>
           <td>
-            <button class="btn btn-sm btn-danger" (click)="eliminarViaje(viaje.id)">Eliminar</button>&nbsp;
-            <button class="btn btn-sm btn-secondary">Reprogramar</button>
+            <button class="btn btn-sm btn-danger" (click)="eliminarViaje(viaje)">Eliminar</button>&nbsp;
+
+            <button class="btn btn-sm btn-secondary" *ngIf="viaje.clima.weather[0].main  === 'Rain' || viaje.clima.weather[0].main  ==='Thunderstorm' ">Reprogramar</button>
           </td>
         </tr>
       </tbody>

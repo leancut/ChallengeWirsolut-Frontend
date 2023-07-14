@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ViajesComponent } from './viajes/viajes.component';
+import { CapitalizarPrimeraLetraPipe, ViajesComponent } from './viajes/viajes.component';
 import { NuevoViajeComponent } from './nuevo-viaje/nuevo-viaje.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -35,7 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NuevoVehiculoComponent,
     AddVehiculoComponent,
     HomeComponent,
-
+    CapitalizarPrimeraLetraPipe
   ],
   imports: [
     BrowserModule,

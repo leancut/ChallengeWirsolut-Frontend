@@ -36,13 +36,9 @@ export class ViajesService {
   
   }
 
-  // Método para obtener todos los viajes
-  obtenerViajes(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/viajes`);
-  }
 
   getClima(city: string, fecha: number){
-    return this.http.get('https://api.openweathermap.org/data/2.5/weather?q='+city+'&dt='+fecha+'&APPID='+this.apiKey);
+    return this.http.get('https://api.openweathermap.org/data/2.5/weather?q='+city+'&dt='+fecha+'&lang=es&APPID='+this.apiKey);
   }
   
 
